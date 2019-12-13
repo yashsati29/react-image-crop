@@ -1,6 +1,6 @@
 {
   "name": "@wisedocnpm/wisedoc-image-crop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A responsive image cropping tool for React. Credits - DominicTobias",
   "repository": "https://github.com/wisedoc-inc/wisedoc-image-crop",
   "main": "dist/ReactCrop.js",
