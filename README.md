@@ -1,5 +1,6 @@
-# React Image Crop
+# Wisedoc Image Crop
 
+Forked from react-image-crop
 A responsive image cropping tool for React.
 
 [![React Image Crop on NPM](https://img.shields.io/npm/v/react-image-crop.svg)](https://www.npmjs.com/package/react-image-crop)
@@ -9,15 +10,16 @@ A responsive image cropping tool for React.
 ![ReactCrop Demo](https://raw.githubusercontent.com/DominicTobias/react-image-crop/master/crop-demo.gif)
 
 ## Table of Contents
+
 1. [Features](#features)
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [CDN](#cdn)
 5. [Props](#props)
 6. [FAQ](#faq)
-    1. [What about showing the crop on the client?](#what-about-showing-the-crop-on-the-client)
-    2. [How to handle image EXIF orientation/rotation](#how-to-handle-image-exif-orientationrotation)
-    3. [How to create a fixed aspect crop programmatically](#how-to-create-a-fixed-aspect-crop-programmatically)
+   1. [What about showing the crop on the client?](#what-about-showing-the-crop-on-the-client)
+   2. [How to handle image EXIF orientation/rotation](#how-to-handle-image-exif-orientationrotation)
+   3. [How to create a fixed aspect crop programmatically](#how-to-create-a-fixed-aspect-crop-programmatically)
 7. [Contributing / Developing](#contributing--developing)
 
 ## Features
@@ -30,6 +32,7 @@ A responsive image cropping tool for React.
 - No dependencies/small footprint (~4.5KB gzip)
 
 ## Installation
+
 ```
 npm i react-image-crop --save
 ```
@@ -39,26 +42,27 @@ npm i react-image-crop --save
 Include the main js module, e.g.:
 
 ```js
-var ReactCrop = require('react-image-crop');
+var ReactCrop = require("react-image-crop");
 // or es6:
-import ReactCrop from 'react-image-crop';
+import ReactCrop from "react-image-crop";
 ```
 
 Include either `dist/ReactCrop.css` or `ReactCrop.scss`.
 
 ```js
-import 'react-image-crop/dist/ReactCrop.css';
+import "react-image-crop/dist/ReactCrop.css";
 // or scss:
-import 'react-image-crop/lib/ReactCrop.scss';
+import "react-image-crop/lib/ReactCrop.scss";
 ```
 
 ## CDN
 
 If you prefer to include ReactCrop globally by marking `react-image-crop` as external in your application, then include `react-image-crop` from one of the following CDNs:
 
-* **cdnjs** *(Coming soon)*
+- **cdnjs** _(Coming soon)_
 
-* [**unpkg**](https://unpkg.com/react-image-crop/)
+- [**unpkg**](https://unpkg.com/react-image-crop/)
+
 ```html
 <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
 ```
@@ -82,16 +86,16 @@ A callback which happens for every change of the crop (i.e. many times as you ar
 Note you _must_ implement this callback and update your crop state, otherwise nothing will change!
 
 ```js
-onChange = (crop) => {
+onChange = crop => {
   this.setState({ crop });
-}
+};
 ```
 
-#### crop (required*)
+#### crop (required\*)
 
 All crop values are in percentages, and are relative to the image. All crop params are optional.
 
-&#42; _While you can initially omit the crop object, any subsequent change will need to be saved to state in the `onChange` callback and passed here._
+\* _While you can initially omit the crop object, any subsequent change will need to be saved to state in the `onChange` callback and passed here._
 
 ```js
 crop: {
@@ -106,9 +110,9 @@ crop: {
 
 If you want a fixed aspect you can either omit `width` and `height`:
 
- ```js
+```js
 crop: {
-  aspect: 16/9
+  aspect: 16 / 9;
 }
 ```
 
@@ -247,7 +251,7 @@ async test() {
 
 Some things to note:
 
-1. [toDataURL](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) is synchronous and will block the main thread, for large images this could be for as long as a couple of seconds. *Always* use `toDataURL('image/jpeg')` otherwise it will default to `image/png` and the conversion will be significantly slower.
+1. [toDataURL](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL) is synchronous and will block the main thread, for large images this could be for as long as a couple of seconds. _Always_ use `toDataURL('image/jpeg')` otherwise it will default to `image/png` and the conversion will be significantly slower.
 
 2. [toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) is both faster and asynchronous, but not supported on old browsers (this is quickly becoming irrelevant).
 
@@ -268,7 +272,10 @@ The library exports a convenience function for this - `makeAspectCrop(partialCro
 When using `makeAspectCrop` specify the aspect, optionally the x and y, and the width or height as a percentage. The other side will be filled in for you.
 
 ```js
-const newCrop = makeAspectCrop({ aspect: 16/9, width: 50 }, image.naturalWidth / image.naturalHeight)
+const newCrop = makeAspectCrop(
+  { aspect: 16 / 9, width: 50 },
+  image.naturalWidth / image.naturalHeight
+);
 ```
 
 ## Contributing / Developing
