@@ -1,13 +1,13 @@
 /* globals window, document, FileReader */
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom'; // eslint-disable-line
-import ReactCrop from '../lib/ReactCrop';
-import '../dist/ReactCrop.css';
+import React, { PureComponent } from "react";
+import ReactDOM from "react-dom"; // eslint-disable-line
+import ReactCrop from "../lib/ReactCrop";
+import "../dist/ReactCrop.css";
 
 /**
  * Load the image in the crop editor.
  */
-const cropEditor = document.querySelector('#crop-editor');
+const cropEditor = document.querySelector("#crop-editor");
 
 class App extends PureComponent {
   state = {
@@ -16,49 +16,49 @@ class App extends PureComponent {
       x: 10,
       y: 10,
       aspect: 1,
-      width: 50,
-    },
-  }
+      width: 50
+    }
+  };
 
-  onSelectFile = (e) => {
+  onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener('load', () => {
+      reader.addEventListener("load", () => {
         this.setState({ src: reader.result });
       });
       reader.readAsDataURL(e.target.files[0]);
     }
-  }
+  };
 
   onImageLoaded = (image, pixelCrop) => {
     this.imageRef = image;
     this.makeClientCrop(this.state.crop, pixelCrop);
-  }
+  };
 
   onCropComplete = (crop, pixelCrop) => {
-    console.log('onCropComplete', { crop, pixelCrop });
+    console.log("onCropComplete", { crop, pixelCrop });
     this.makeClientCrop(crop, pixelCrop);
-  }
+  };
 
-  onCropChange = (crop) => {
+  onCropChange = crop => {
     // console.log('onCropChange', crop);
     this.setState({ crop });
-  }
+  };
 
   onDragStart = () => {
-    console.log('onDragStart');
-  }
+    console.log("onDragStart");
+  };
 
   onDragEnd = () => {
-    console.log('onDragEnd');
-  }
+    console.log("onDragEnd");
+  };
 
   getCroppedImg(image, pixelCrop, fileName) {
-    console.log('getCroppedImg', { image, pixelCrop, fileName });
-    const canvas = document.createElement('canvas');
+    console.log("getCroppedImg", { image, pixelCrop, fileName });
+    const canvas = document.createElement("canvas");
     canvas.width = pixelCrop.width;
     canvas.height = pixelCrop.height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
       image,
@@ -69,16 +69,16 @@ class App extends PureComponent {
       0,
       0,
       pixelCrop.width,
-      pixelCrop.height,
+      pixelCrop.height
     );
 
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
+    return new Promise(resolve => {
+      canvas.toBlob(blob => {
         blob.name = fileName; // eslint-disable-line no-param-reassign
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
         resolve(this.fileUrl);
-      }, 'image/jpeg');
+      }, "image/jpeg");
     });
   }
 
@@ -87,7 +87,7 @@ class App extends PureComponent {
       this.getCroppedImg(
         this.imageRef,
         pixelCrop,
-        'newFile.jpeg',
+        "newFile.jpeg"
       ).then(croppedImageUrl => this.setState({ croppedImageUrl }));
     }
   }
@@ -96,11 +96,11 @@ class App extends PureComponent {
     <button
       type="button"
       style={{
-        position: 'absolute',
+        position: "absolute",
         bottom: -25,
-        right: 0,
+        right: 0
       }}
-      onClick={() => window.alert('You click addon!')}
+      onClick={() => window.alert("You click addon!")}
     >
       custom addon
     </button>
@@ -123,6 +123,7 @@ class App extends PureComponent {
             onChange={this.onCropChange}
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
+            ruleOfThirds
             renderSelectionAddon={this.renderSelectionAddon}
           />
         )}

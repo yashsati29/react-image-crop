@@ -774,11 +774,13 @@ var ReactCrop = function (_PureComponent) {
     key: 'createCropSelection',
     value: function createCropSelection() {
       var _this3 = this;
-
+      
       var _props4 = this.props,
-          disabled = _props4.disabled,
-          locked = _props4.locked,
-          renderSelectionAddon = _props4.renderSelectionAddon;
+      disabled = _props4.disabled,
+      locked = _props4.locked,
+      renderSelectionAddon = _props4.renderSelectionAddon,
+      ruleOfThirds= _props4.ruleOfThirds;
+      
 
       var style = this.getCropStyle();
 
@@ -810,7 +812,13 @@ var ReactCrop = function (_PureComponent) {
           _react2.default.createElement('div', { className: 'ReactCrop__drag-handle ord-sw', 'data-ord': 'sw' }),
           _react2.default.createElement('div', { className: 'ReactCrop__drag-handle ord-w', 'data-ord': 'w' })
         ),
-        renderSelectionAddon && renderSelectionAddon(this.state)
+        renderSelectionAddon && renderSelectionAddon(this.state),
+        ruleOfThirds && _react2.default.createElement(
+          'div',
+          { className: 'ReactCrop__rule-of-thirds' },
+          _react2.default.createElement('div', { className: 'ReactCrop__rule-of-thirds-hz'}),
+          _react2.default.createElement('div', { className: 'ReactCrop__rule-of-thirds-vt'})
+        )
       );
     }
   }, {
@@ -887,6 +895,10 @@ var ReactCrop = function (_PureComponent) {
 
       if (locked) {
         componentClasses.push('ReactCrop--locked');
+      }
+
+      if (ruleOfThirds) {
+        componentClasses.push('ReactCrop--rule-of-thirds');
       }
 
       if (className) {
@@ -978,7 +990,8 @@ ReactCrop.propTypes = {
   onDragEnd: _propTypes2.default.func,
   src: _propTypes2.default.string.isRequired,
   style: _propTypes2.default.shape({}),
-  renderSelectionAddon: _propTypes2.default.func
+  renderSelectionAddon: _propTypes2.default.func,
+  ruleOfThirds: _propTypes2.default.bool,
 };
 
 ReactCrop.defaultProps = {
@@ -1002,7 +1015,8 @@ ReactCrop.defaultProps = {
   style: undefined,
   imageStyle: undefined,
   renderSelectionAddon: undefined,
-  useNaturalImageDimensions: true
+  useNaturalImageDimensions: true,
+  ruleOfThirds: false
 };
 
 exports.default = ReactCrop;
